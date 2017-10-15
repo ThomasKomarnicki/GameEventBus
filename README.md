@@ -9,7 +9,7 @@ A simple EventBus library in C# for Unity
 class PlayerJumpEvent : EventBase {
   public Vector3 jumpPosition;
 
-  public PlayerMoveEvent(Vector3 pos) {
+  public PlayerJumpEvent(Vector3 pos) {
     jumpPosition = pos;
   }
 }
@@ -76,7 +76,7 @@ a Bullet
 
 public class Hud : Monobehaviour {
   void Start() {
-    GameController.Bus.Subscribe<BulletCollision>(OnBulletCollision);
+    GameController.Bus.Subscribe<BulletCollisionEvent>(OnBulletCollision);
   }
 
   void OnBulletCollision(BulletCollisionEvent event) {
@@ -84,7 +84,7 @@ public class Hud : Monobehaviour {
   }
 
   void OnDestroy() {
-    GameController.Bus.UnSubscribe(OnBulletCollision);
+    GameController.Bus.Unsubscribe(OnBulletCollision);
   }
 }
 
